@@ -1,6 +1,7 @@
 package com.laioffer.spotify
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
@@ -27,10 +28,23 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import coil.compose.AsyncImage
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.laioffer.spotify.datamodel.Section
+import com.laioffer.spotify.network.NetworkApi
+import com.laioffer.spotify.network.NetworkModule
 import com.laioffer.spotify.ui.theme.SpotifyTheme
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 // customized extend AppCompatActivity
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    //field injection
+    @Inject
+    lateinit var networkApi: NetworkApi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +77,16 @@ class MainActivity : AppCompatActivity() {
             NavigationUI.onNavDestinationSelected(it, navController)
             navController.popBackStack(it.itemId, inclusive = false)
             true
+        }
+
+//        val retrofit = NetworkModule.provideRetrofit()
+//        val networkApi = retrofit.create(NetworkApi::class.java)
+        val call = networkApi.getHomeFeed()
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val response: retrofit2.Response<List<Section>> = call.execute()
+            val sections: List<Section>? = response.body()
+            Log.d("Network", sections.toString())
         }
     }
 }
