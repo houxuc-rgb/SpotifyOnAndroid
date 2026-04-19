@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -96,6 +97,10 @@ dependencies {
     // mvvm viewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
     // room database
-
+    def roomVersion = "2.4.3"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
     // exoplayer
 }
