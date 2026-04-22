@@ -62,19 +62,19 @@ class MainActivity : AppCompatActivity() {
             Log.d("Network", response.toString())
         }
         // remember it runs everytime you start the app
-        lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                val album = Album(
-                    id = 1,
-                    name =  "Hexagonal",
-                    year = "2008",
-                    cover = "https://upload.wikimedia.org/wikipedia/en/6/6d/Leessang-Hexagonal_%28cover%29.jpg",
-                    artists = "Lesssang",
-                    description = "Leessang (Korean: 리쌍) was a South Korean hip hop duo, composed of Kang Hee-gun (Gary or Garie) and Gil Seong-joon (Gil)"
-                )
-                databaseDao.favoriteAlbum(album)
-            }
-        }
+//        lifecycleScope.launch {
+//            withContext(Dispatchers.IO) {
+//                val album = Album(
+//                    id = 1,
+//                    name =  "Hexagonal",
+//                    year = "2008",
+//                    cover = "https://upload.wikimedia.org/wikipedia/en/6/6d/Leessang-Hexagonal_%28cover%29.jpg",
+//                    artists = "Lesssang",
+//                    description = "Leessang (Korean: 리쌍) was a South Korean hip hop duo, composed of Kang Hee-gun (Gary or Garie) and Gil Seong-joon (Gil)"
+//                )
+//                databaseDao.favoriteAlbum(album)
+//            }
+//        }
 
     }
 }

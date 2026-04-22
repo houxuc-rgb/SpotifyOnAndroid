@@ -15,4 +15,17 @@ data class Album(
     val cover: String,
     val artists: String,
     val description: String
-): Serializable
+): Serializable {
+    companion object {
+        fun empty(): Album {
+            return Album(
+                id = -1,
+                "",
+                "",
+                "",
+                "",
+                "",
+            )
+        }
+    }
+}
